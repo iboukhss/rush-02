@@ -6,7 +6,7 @@
 /*   By: iboukhss <iboukhss@student.42luxe...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:51:15 by iboukhss          #+#    #+#             */
-/*   Updated: 2023/12/09 18:01:27 by iboukhss         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:56:48 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,35 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void	ft_show_file(char *filename)
+ssize_t	ft_get_file(char buffer[], char *filename)
 {
-	int		dict_file;
-	char	buffer[1024];
+	int		fd;
 	ssize_t	bytes_read;
 
-	// useless variables
-	int		x;
-	ssize_t	i;
-
-	// The return of open() is a file descriptor (int)
-	dict_file = open(filename, O_RDONLY);
+	// open() returns the file descriptor (int)
+	fd = open(filename, O_RDONLY);
 
 	// read() returns a ssize_t (signed size_t)
-	bytes_read = read(dict_file, buffer, 1024);
+	bytes_read = read(fd, buffer, 1024);
+	return (bytes_read);
+}
 
-	printf("bytes read: %zd\n", bytes_read);
-	//printf("%s", buffer);
+void	ft_tokenize_number(char *buffer, ssize_t bufsize)
+{
+	char	nb_token[10];
+	
+	ssize_t	i = 0;
+	int		x = 0;
+	int		is_word = 1;
 
-	i = 0;
-	while (i < bytes_read)
+	while (i < bufsize && is_word == 1)
 	{
-		x = buffer[i];
-		if (x == '\n')
-			printf("\nNEWLINE\n");
+		if (buffer[i] == ':')
+			is_word = 0;
 		else
-			printf("%c", x);
+			nb_token[x] = buffer[i];
 		++i;
+		++x;
 	}
+	printf("nb_token: %s\n", nb_token);
 }

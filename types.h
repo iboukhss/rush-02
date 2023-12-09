@@ -6,7 +6,7 @@
 /*   By: iboukhss <iboukhss@student.42luxe...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 17:23:33 by iboukhss          #+#    #+#             */
-/*   Updated: 2023/12/09 18:01:56 by iboukhss         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:21:24 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 struct	s_dict
 {
-	int		number;
+	char	*number;
 	char	*word;
 };
 
