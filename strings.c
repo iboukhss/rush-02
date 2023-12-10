@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dict_parse.c                                       :+:      :+:    :+:   */
+/*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iboukhss <iboukhss@student.42luxe...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 17:51:15 by iboukhss          #+#    #+#             */
-/*   Updated: 2023/12/10 22:48:24 by iboukhss         ###   ########.fr       */
+/*   Created: 2023/12/10 23:00:13 by iboukhss          #+#    #+#             */
+/*   Updated: 2023/12/10 23:11:05 by iboukhss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
-#include <fcntl.h>
 
-ssize_t	ft_read_file(char *buf, char *filename, size_t bufsize, int *fd)
+int	ft_strcmp(char *s1, char *s2)
 {
-	ssize_t	bytes_read;
-
-	*fd = open(filename, O_RDONLY);
-	bytes_read = read(*fd, buf, bufsize);
-	return (bytes_read);
+	while ((*s1 == *s2) && *s1)
+	{
+		++s1;
+		++s2;
+	}
+	return (*s1 - *s2);
 }
 
-int	ft_count_entries(char *buf, ssize_t bytes_read)
+void	ft_putstr(char *str)
 {
-	int	count;
-	int	i;
-
-	i = 0;
-	count = 0;
-	while (i < bytes_read)
+	while(*str)
 	{
-		if (buf[i] == '\n')
-			++count;
-		++i;
+		write(1, str, 1);
+		++str;
 	}
-	return (count);
 }
